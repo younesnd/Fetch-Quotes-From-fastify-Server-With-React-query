@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { fetchQuotesByPage, QuotesData } from '@/api/quoteApi'
+import { fetchQuotesByPage, QuotesData} from '@/api/QuoteApi/fetchQuoteapi'
 import { useState } from 'react'
 import clsx from 'clsx'
 

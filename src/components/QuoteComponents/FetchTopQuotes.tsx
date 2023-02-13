@@ -1,13 +1,14 @@
 import { useQuery } from 'react-query'
-import { fetchTopQuotes, Quote } from '@/api/quoteApi'
+import { fetchQuoteApi, Quote } from '@/api/QuoteApi/fetchQuoteapi'
+
+const UseFetchQuote = async () => {
+  const response = await fetchQuoteApi()
+  const result = response.data.quotes
+  return result
+}
 
 const FetchTopQuotes = () => {
-  const {
-    data: quotes,
-    isLoading,
-    isSuccess,
-    isError,
-  } = useQuery<Quote[]>('top-quotes', () => fetchTopQuotes())
+  const {data:quotes,isLoading,isSuccess,isError} = useQuery<Quote[]>('top-quotes', () => UseFetchQuote())
   return (
     <div className="py-8 max-w-2xl mx-auto">
       <div>
@@ -26,7 +27,8 @@ const FetchTopQuotes = () => {
               return (
                 <blockquote
                   key={quote.id}
-                  className="relative p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote"
+                  className="relative p-4 text-xl italic border-l-4 bg-neutral-100
+text-neutral-600 border-neutral-500 quote"
                 >
                   <p className="mb-4">"{quote.quote}"</p>
                   <cite className="flex items-center justify-center">
@@ -45,5 +47,4 @@ const FetchTopQuotes = () => {
     </div>
   )
 }
-
 export default FetchTopQuotes
